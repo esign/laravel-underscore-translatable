@@ -1,0 +1,56 @@
+{
+    "name": "esign/laravel-underscore-translatable",
+    "description": "A laravel package to make your eloquent models translatable.",
+    "keywords": [
+        "esign",
+        "translatable",
+        "translations",
+        "eloquent"
+    ],
+    "homepage": "https://github.com/esign/laravel-underscore-translatable",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jordy Van der Haegen",
+            "email": "jordy.vanderhaegen@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.2",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Esign\\UnderscoreTranslatable\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Esign\\UnderscoreTranslatable\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpcs": "vendor/bin/php-cs-fixer fix"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Esign\\UnderscoreTranslatable\\UnderscoreTranslatableServiceProvider"
+            ],
+            "aliases": {
+                "UnderscoreTranslatable": "Esign\\UnderscoreTranslatable\\UnderscoreTranslatableFacade"
+            }
+        }
+    }
+}
