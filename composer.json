@@ -52,5 +52,7 @@
                 "UnderscoreTranslatable": "Esign\\UnderscoreTranslatable\\UnderscoreTranslatableFacade"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
