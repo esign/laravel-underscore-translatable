@@ -43,16 +43,6 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Esign\\UnderscoreTranslatable\\UnderscoreTranslatableServiceProvider"
-            ],
-            "aliases": {
-                "UnderscoreTranslatable": "Esign\\UnderscoreTranslatable\\UnderscoreTranslatableFacade"
-            }
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
