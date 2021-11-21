@@ -17,15 +17,29 @@ trait UnderscoreTranslatable
         return $key . '_' . ($locale ?? App::getLocale());
     }
 
-    public function getTranslation(string $key, ?string $locale = null): mixed
+    public function getTranslation(string $key, ?string $locale = null, bool $useFallbackLocale = false): mixed
     {
         $value = $this->{$this->getTranslatableAttributeName($key, $locale)};
 
         if ($this->hasGetMutator($key)) {
-            return $this->mutateAttribute($key, $value);
+            $value = $this->mutateAttribute($key, $value);
+        }
+
+        if (empty($value) && $useFallbackLocale) {
+            $value = $this->getTranslation($key, config('app.fallback_locale', $locale), false);
         }
 
         return $value;
+    }
+
+    public function getTranslationWithFallback(string $key, ?string $locale = null): mixed
+    {
+        return $this->getTranslation($key, $locale, true);
+    }
+
+    public function getTranslationWithoutFallback(string $key, ?string $locale = null): mixed
+    {
+        return $this->getTranslation($key, $locale, false);
     }
 
     public function setTranslation(string $key, string $locale, mixed $value): self

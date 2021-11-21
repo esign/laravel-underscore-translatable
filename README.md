@@ -56,6 +56,25 @@ $post->title_nl
 $post->getTranslation('title', 'nl')
 ```
 
+### Using a fallback
+This package allows you to return the value of an attribute's `fallback_locale` defined in the `config/app.php` of your application.
+
+The third `useFallbackLocale` parameter of the `getTranslation` method may be used to control this behaviour:
+```php
+$post->title_en = 'Your first translation';
+$post->title_nl = null;
+$post->getTranslation('title', 'nl', true); // returns 'Your first translation'
+$post->getTranslation('title', 'nl', false); // returns null
+```
+
+Or you may use dedicated methods for this:
+```php
+$post->title_en = 'Your first translation';
+$post->title_nl = null;
+$post->getTranslationWithFallback('title', 'nl'); // returns 'Your first translation'
+$post->getTranslationWithoutFallback('title', 'nl'); // returns null
+```
+
 ### Setting translations
 
 To set the translation for the current locale you may use the attribute you have defined in the `translatable` property. Or you could pass it immediately when creating a model:

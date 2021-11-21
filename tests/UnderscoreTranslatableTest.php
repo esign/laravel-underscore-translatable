@@ -44,7 +44,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_a_translatable_attribute_using_a_method()
+    public function it_can_get_a_translation()
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -56,7 +56,67 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_a_translatable_attribute_using_a_property()
+    public function it_can_get_a_translation_using_a_fallback()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals('Test nl', $post->getTranslation('title', 'nl', true));
+        $this->assertEquals('Test en', $post->getTranslation('title', 'en', true));
+        $this->assertEquals('Test en', $post->getTranslation('title', 'fr', true));
+    }
+
+    /** @test */
+    public function it_can_get_a_translation_without_using_a_fallback()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals('Test nl', $post->getTranslation('title', 'nl', false));
+        $this->assertEquals('Test en', $post->getTranslation('title', 'en', false));
+        $this->assertNull($post->getTranslation('title', 'fr', false));
+    }
+
+    /** @test */
+    public function it_can_get_a_translation_with_a_fallback()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals('Test nl', $post->getTranslationWithFallback('title', 'nl'));
+        $this->assertEquals('Test en', $post->getTranslationWithFallback('title', 'en'));
+        $this->assertEquals('Test en', $post->getTranslationWithFallback('title', 'fr'));
+    }
+
+    /** @test */
+    public function it_can_get_a_translation_without_a_fallback()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals('Test nl', $post->getTranslationWithoutFallback('title', 'nl'));
+        $this->assertEquals('Test en', $post->getTranslationWithoutFallback('title', 'en'));
+        $this->assertNull($post->getTranslationWithoutFallback('title', 'fr'));
+    }
+
+    /** @test */
+    public function it_can_get_a_translatable_attribute_using_a_method_with_a_fallback()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = null;
+
+        $this->assertEquals('Test en', $post->getTranslation('title', 'nl', true));
+        $this->assertEquals('Test en', $post->getTranslation('title', 'en', true));
+        $this->assertEquals('Test en', $post->getTranslation('title', 'fr', true));
+    }
+
+    /** @test */
+    public function it_can_get_a_translation_using_a_property()
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -73,7 +133,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_a_translatable_attribute_using_an_accessor()
+    public function it_can_get_a_translation_using_an_accessor()
     {
         $post = new Post();
         $post->field_with_accessor_en = 'Test en';
