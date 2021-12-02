@@ -56,6 +56,19 @@ $post->title_nl
 $post->getTranslation('title', 'nl')
 ```
 
+To check if a translation exists, you may use the `hasTranslation` method:
+```php
+$post->title_en = 'Your first translation';
+$post->title_nl = '';
+$post->title_fr = null;
+
+$post->hasTranslation('title', 'en'); // returns true
+$post->hasTranslation('title', 'nl'); // returns false
+$post->hasTranslation('title', 'fr'); // returns false
+```
+
+In case you do not supply a locale, the current locale will be used.
+
 ### Using a fallback
 This package allows you to return the value of an attribute's `fallback_locale` defined in the `config/app.php` of your application.
 

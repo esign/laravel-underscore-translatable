@@ -143,6 +143,19 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     /** @test */
+    public function it_can_check_if_it_has_a_translation()
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = '';
+        $post->title_fr = null;
+
+        $this->assertTrue($post->hasTranslation('title', 'en'));
+        $this->assertFalse($post->hasTranslation('title', 'nl'));
+        $this->assertFalse($post->hasTranslation('title', 'fr'));
+    }
+
+    /** @test */
     public function it_can_set_a_translatable_attribute_using_a_method()
     {
         $post = new Post();
