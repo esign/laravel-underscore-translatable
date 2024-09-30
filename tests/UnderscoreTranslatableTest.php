@@ -231,4 +231,24 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test nl', $post->title_nl);
         $this->assertEquals('Test en', $post->title_en);
     }
+
+    /** @test */
+    public function it_can_define_a_custom_fallback_locale()
+    {
+        $postClassWithCustomFallbackLocale = new class extends Post {
+            public function getFallbackLocale(?string $locale = null): ?string
+            {
+                return 'fr';
+            }
+        };
+
+        $post = new $postClassWithCustomFallbackLocale();
+        $post->title_en = 'Test en';
+        $post->title_fr = 'Test fr';
+
+        $this->assertEquals('Test en', $post->getTranslationWithFallback('title'));
+        $this->assertEquals('Test en', $post->getTranslationWithFallback('title', 'en'));
+        $this->assertEquals('Test fr', $post->getTranslationWithFallback('title', 'nl'));
+        $this->assertEquals('Test fr', $post->getTranslationWithFallback('title', 'fr'));
+    }
 }

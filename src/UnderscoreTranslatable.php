@@ -26,7 +26,7 @@ trait UnderscoreTranslatable
         }
 
         if (empty($value) && $useFallbackLocale) {
-            $value = $this->getTranslation($key, config('app.fallback_locale', $locale), false);
+            $value = $this->getTranslation($key, $this->getFallbackLocale($locale), false);
         }
 
         return $value;
@@ -94,5 +94,10 @@ trait UnderscoreTranslatable
         }
 
         return parent::getAttribute($key);
+    }
+
+    public function getFallbackLocale(?string $locale = null): ?string
+    {
+        return config('app.fallback_locale', $locale);
     }
 }
