@@ -7,7 +7,7 @@ use Esign\UnderscoreTranslatable\Tests\Models\Post;
 use Esign\UnderscoreTranslatable\Tests\TestCase;
 use Illuminate\Support\Facades\App;
 
-class UnderscoreTranslatableTest extends TestCase
+final class UnderscoreTranslatableTest extends TestCase
 {
     #[Test]
     public function it_can_check_if_an_attribute_is_translatable(): void
