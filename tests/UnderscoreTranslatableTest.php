@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\App;
 class UnderscoreTranslatableTest extends TestCase
 {
     #[Test]
-    public function it_can_check_if_an_attribute_is_translatable()
+    public function it_can_check_if_an_attribute_is_translatable(): void
     {
         $post = new Post();
         $this->assertTrue($post->isTranslatableAttribute('title'));
@@ -18,7 +18,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translatable_attribute_name()
+    public function it_can_get_a_translatable_attribute_name(): void
     {
         $post = new Post();
         App::setLocale('nl');
@@ -27,7 +27,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_wont_interfere_when_getting_non_translatable_attributes()
+    public function it_wont_interfere_when_getting_non_translatable_attributes(): void
     {
         $post = new Post();
         $post->body = 'Test';
@@ -36,7 +36,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_wont_interfere_when_setting_non_translatable_attributes()
+    public function it_wont_interfere_when_setting_non_translatable_attributes(): void
     {
         $post = new Post();
         $post->setAttribute('body', 'Test');
@@ -45,7 +45,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation()
+    public function it_can_get_a_translation(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -57,7 +57,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_using_a_fallback()
+    public function it_can_get_a_translation_using_a_fallback(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -69,7 +69,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_without_using_a_fallback()
+    public function it_can_get_a_translation_without_using_a_fallback(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -81,7 +81,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_with_a_fallback()
+    public function it_can_get_a_translation_with_a_fallback(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -93,7 +93,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_without_a_fallback()
+    public function it_can_get_a_translation_without_a_fallback(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -105,7 +105,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translatable_attribute_using_a_method_with_a_fallback()
+    public function it_can_get_a_translatable_attribute_using_a_method_with_a_fallback(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -117,7 +117,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_using_a_property()
+    public function it_can_get_a_translation_using_a_property(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -134,7 +134,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_get_a_translation_using_an_accessor()
+    public function it_can_get_a_translation_using_an_accessor(): void
     {
         $post = new Post();
         $post->field_with_accessor_en = 'Test en';
@@ -144,7 +144,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_check_if_it_has_a_translation()
+    public function it_can_check_if_it_has_a_translation(): void
     {
         $post = new Post();
         $post->title_en = 'Test en';
@@ -157,7 +157,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_a_translatable_attribute_using_a_method()
+    public function it_can_set_a_translatable_attribute_using_a_method(): void
     {
         $post = new Post();
         $post->setTranslation('title', 'nl', 'Test nl');
@@ -168,7 +168,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_a_translatable_attribute_using_a_property()
+    public function it_can_set_a_translatable_attribute_using_a_property(): void
     {
         $post = new Post();
         $post->title = 'Test en';
@@ -177,7 +177,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_a_translated_attribute_using_a_property()
+    public function it_can_set_a_translated_attribute_using_a_property(): void
     {
         $post = new Post();
         $post->title_nl = 'Test nl';
@@ -188,7 +188,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_a_translatable_attribute_using_a_mutator()
+    public function it_can_set_a_translatable_attribute_using_a_mutator(): void
     {
         $post = new Post();
         $post->setTranslation('field_with_mutator', 'nl', 'Test nl');
@@ -197,7 +197,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_a_translatable_attribute_using_make()
+    public function it_can_set_a_translatable_attribute_using_make(): void
     {
         $post = Post::make([
             'title' => 'Test en',
@@ -207,7 +207,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_multiple_translatable_attributes_using_a_method()
+    public function it_can_set_multiple_translatable_attributes_using_a_method(): void
     {
         $post = new Post();
         $post->setTranslations('title', [
@@ -220,7 +220,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_set_multiple_translatable_attributes_using_make()
+    public function it_can_set_multiple_translatable_attributes_using_make(): void
     {
         $post = Post::make([
             'title' => [
@@ -234,7 +234,7 @@ class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
-    public function it_can_define_a_custom_fallback_locale()
+    public function it_can_define_a_custom_fallback_locale(): void
     {
         $postClassWithCustomFallbackLocale = new class extends Post {
             public function getFallbackLocale(?string $locale = null): ?string
