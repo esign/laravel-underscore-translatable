@@ -2,13 +2,14 @@
 
 namespace Esign\UnderscoreTranslatable;
 
+use PHPUnit\Framework\Attributes\Test;
 use Esign\UnderscoreTranslatable\Tests\Models\Post;
 use Esign\UnderscoreTranslatable\Tests\TestCase;
 use Illuminate\Support\Facades\App;
 
 class UnderscoreTranslatableTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function it_can_check_if_an_attribute_is_translatable()
     {
         $post = new Post();
@@ -16,7 +17,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertFalse($post->isTranslatableAttribute('non-translatable-field'));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translatable_attribute_name()
     {
         $post = new Post();
@@ -25,7 +26,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('title_en', $post->getTranslatableAttributeName('title', 'en'));
     }
 
-    /** @test */
+    #[Test]
     public function it_wont_interfere_when_getting_non_translatable_attributes()
     {
         $post = new Post();
@@ -34,7 +35,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test', $post->body);
     }
 
-    /** @test */
+    #[Test]
     public function it_wont_interfere_when_setting_non_translatable_attributes()
     {
         $post = new Post();
@@ -43,7 +44,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test', $post->body);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation()
     {
         $post = new Post();
@@ -55,7 +56,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertNull($post->getTranslation('title', 'fr'));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_using_a_fallback()
     {
         $post = new Post();
@@ -67,7 +68,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->getTranslation('title', 'fr', true));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_without_using_a_fallback()
     {
         $post = new Post();
@@ -79,7 +80,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertNull($post->getTranslation('title', 'fr', false));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_with_a_fallback()
     {
         $post = new Post();
@@ -91,7 +92,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->getTranslationWithFallback('title', 'fr'));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_without_a_fallback()
     {
         $post = new Post();
@@ -103,7 +104,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertNull($post->getTranslationWithoutFallback('title', 'fr'));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translatable_attribute_using_a_method_with_a_fallback()
     {
         $post = new Post();
@@ -115,7 +116,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->getTranslation('title', 'fr', true));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_using_a_property()
     {
         $post = new Post();
@@ -132,7 +133,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertNull($post->title);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_a_translation_using_an_accessor()
     {
         $post = new Post();
@@ -142,7 +143,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('test en', $post->field_with_accessor);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_check_if_it_has_a_translation()
     {
         $post = new Post();
@@ -155,7 +156,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertFalse($post->hasTranslation('title', 'fr'));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_translatable_attribute_using_a_method()
     {
         $post = new Post();
@@ -166,7 +167,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_translatable_attribute_using_a_property()
     {
         $post = new Post();
@@ -175,7 +176,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_translated_attribute_using_a_property()
     {
         $post = new Post();
@@ -186,7 +187,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_translatable_attribute_using_a_mutator()
     {
         $post = new Post();
@@ -195,7 +196,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('TEST NL', $post->field_with_mutator_nl);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_a_translatable_attribute_using_make()
     {
         $post = Post::make([
@@ -205,7 +206,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_multiple_translatable_attributes_using_a_method()
     {
         $post = new Post();
@@ -218,7 +219,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_multiple_translatable_attributes_using_make()
     {
         $post = Post::make([
@@ -232,7 +233,7 @@ class UnderscoreTranslatableTest extends TestCase
         $this->assertEquals('Test en', $post->title_en);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_define_a_custom_fallback_locale()
     {
         $postClassWithCustomFallbackLocale = new class extends Post {
