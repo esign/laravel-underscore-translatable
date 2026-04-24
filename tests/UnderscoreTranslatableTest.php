@@ -157,6 +157,24 @@ final class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
+    public function it_can_get_translated_locales_for_a_key(): void
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals(['en', 'nl'], $post->getTranslatedLocales('title'));
+    }
+
+    #[Test]
+    public function it_returns_an_empty_array_when_no_translated_locales_exist_for_a_key(): void
+    {
+        $post = new Post();
+
+        $this->assertEquals([], $post->getTranslatedLocales('title'));
+    }
+
+    #[Test]
     public function it_can_get_all_translations_for_a_key(): void
     {
         $post = new Post();
