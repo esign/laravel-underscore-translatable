@@ -2,11 +2,24 @@
 
 namespace Esign\UnderscoreTranslatable;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 
 trait UnderscoreTranslatable
 {
+    protected ?string $translationLocale = null;
+
+    public function setLocale(string $locale): self
+    {
+        $this->translationLocale = $locale;
+
+        return $this;
+    }
+
+    public function getLocale(): string
+    {
+        return $this->translationLocale ?: config('app.locale');
+    }
+
     public function isTranslatableAttribute(string $key): bool
     {
         return in_array($key, $this->getTranslatableAttributes());
@@ -14,7 +27,7 @@ trait UnderscoreTranslatable
 
     public function getTranslatableAttributeName(string $key, ?string $locale = null): string
     {
-        return $key . '_' . ($locale ?? App::getLocale());
+        return $key . '_' . ($locale ?? $this->getLocale());
     }
 
     public function getTranslation(string $key, ?string $locale = null, bool $useFallbackLocale = false): mixed
@@ -113,7 +126,7 @@ trait UnderscoreTranslatable
         }
 
         if ($this->isTranslatableAttribute($key)) {
-            return $this->setTranslation($key, App::getLocale(), $value);
+            return $this->setTranslation($key, $this->getLocale(), $value);
         }
 
         return parent::setAttribute($key, $value);

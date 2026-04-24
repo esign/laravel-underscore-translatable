@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\App;
 final class UnderscoreTranslatableTest extends TestCase
 {
     #[Test]
+    public function it_can_set_and_get_the_translation_locale(): void
+    {
+        config(['app.locale' => 'en']);
+
+        $post = new Post();
+
+        $this->assertEquals('en', $post->getLocale());
+        $this->assertSame($post, $post->setLocale('nl'));
+        $this->assertEquals('nl', $post->getLocale());
+    }
+
+    #[Test]
     public function it_can_check_if_an_attribute_is_translatable(): void
     {
         $post = new Post();
@@ -239,9 +251,24 @@ final class UnderscoreTranslatableTest extends TestCase
     public function it_can_set_a_translatable_attribute_using_a_property(): void
     {
         $post = new Post();
+        $post->setLocale('nl');
         $post->title = 'Test en';
 
-        $this->assertEquals('Test en', $post->title_en);
+        $this->assertEquals('Test en', $post->title_nl);
+    }
+
+    #[Test]
+    public function it_can_get_a_translation_using_a_property_with_a_custom_model_locale(): void
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $post->setLocale('nl');
+        $this->assertEquals('Test nl', $post->title);
+
+        $post->setLocale('en');
+        $this->assertEquals('Test en', $post->title);
     }
 
     #[Test]
