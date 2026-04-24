@@ -56,6 +56,24 @@ $post->title_nl
 $post->getTranslation('title', 'nl')
 ```
 
+To retrieve all translations, you may use `getTranslations`:
+```php
+$post->getTranslations('title');
+// returns ['en' => 'Your first translation', 'nl' => 'Jouw eerste vertaling']
+```
+
+If you omit the key, translations for all translatable attributes will be returned:
+```php
+$post->getTranslations();
+// returns ['title' => ['en' => '...', 'nl' => '...']]
+```
+
+You may also limit the returned locales:
+```php
+$post->getTranslations('title', ['en']);
+// returns ['en' => 'Your first translation']
+```
+
 To check if a translation exists, you may use the `hasTranslation` method:
 ```php
 $post->title_en = 'Your first translation';
