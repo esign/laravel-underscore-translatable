@@ -42,6 +42,38 @@ trait UnderscoreTranslatable
         return $this->getTranslation($key, $locale, false);
     }
 
+    public function getTranslations(?string $key = null, ?array $allowedLocales = null): array
+    {
+        if ($key === null) {
+            $translations = [];
+
+            foreach ($this->getTranslatableAttributes() as $translatableAttribute) {
+                $translations[$translatableAttribute] = $this->getTranslations($translatableAttribute, $allowedLocales);
+            }
+
+            return $translations;
+        }
+
+        $translations = [];
+        $prefix = $key . '_';
+
+        foreach ($this->attributes as $attribute => $value) {
+            if (! str_starts_with($attribute, $prefix)) {
+                continue;
+            }
+
+            $locale = substr($attribute, strlen($prefix));
+
+            if ($allowedLocales !== null && ! in_array($locale, $allowedLocales)) {
+                continue;
+            }
+
+            $translations[$locale] = $this->getTranslationWithoutFallback($key, $locale);
+        }
+
+        return $translations;
+    }
+
     public function hasTranslation(string $key, ?string $locale = null): bool
     {
         return ! empty($this->getTranslationWithoutFallback($key, $locale));

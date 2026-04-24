@@ -157,6 +157,56 @@ final class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
+    public function it_can_get_all_translations_for_a_key(): void
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+
+        $this->assertEquals([
+            'en' => 'Test en',
+            'nl' => 'Test nl',
+        ], $post->getTranslations('title'));
+    }
+
+    #[Test]
+    public function it_can_get_allowed_translations_for_a_key(): void
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+        $post->title_fr = 'Test fr';
+
+        $this->assertEquals([
+            'en' => 'Test en',
+            'fr' => 'Test fr',
+        ], $post->getTranslations('title', ['en', 'fr']));
+    }
+
+    #[Test]
+    public function it_can_get_all_translations_for_all_translatable_attributes(): void
+    {
+        $post = new Post();
+        $post->title_en = 'Test en';
+        $post->title_nl = 'Test nl';
+        $post->field_with_accessor_en = 'Test Accessor';
+        $post->field_with_mutator_nl = 'TEST MUTATOR';
+
+        $this->assertEquals([
+            'title' => [
+                'en' => 'Test en',
+                'nl' => 'Test nl',
+            ],
+            'field_with_accessor' => [
+                'en' => 'test accessor',
+            ],
+            'field_with_mutator' => [
+                'nl' => 'TEST MUTATOR',
+            ],
+        ], $post->getTranslations());
+    }
+
+    #[Test]
     public function it_can_set_a_translatable_attribute_using_a_method(): void
     {
         $post = new Post();
