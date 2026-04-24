@@ -79,6 +79,11 @@ trait UnderscoreTranslatable
         return ! empty($this->getTranslationWithoutFallback($key, $locale));
     }
 
+    public function getTranslatedLocales(string $key): array
+    {
+        return array_keys($this->getTranslations($key));
+    }
+
     public function setTranslation(string $key, string $locale, mixed $value): self
     {
         if ($this->hasSetMutator($key)) {

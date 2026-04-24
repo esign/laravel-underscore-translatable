@@ -85,6 +85,14 @@ $post->hasTranslation('title', 'nl'); // returns false
 $post->hasTranslation('title', 'fr'); // returns false
 ```
 
+To retrieve only the locales that have a translated column present for a specific key, use `getTranslatedLocales`:
+```php
+$post->title_en = 'Your first translation';
+$post->title_nl = 'Jouw eerste vertaling';
+
+$post->getTranslatedLocales('title'); // returns ['en', 'nl']
+```
+
 In case you do not supply a locale, the current locale will be used.
 
 ### Using a fallback
