@@ -8,7 +8,7 @@ trait UnderscoreTranslatable
 {
     protected ?string $translationLocale = null;
 
-    public function setLocale(string $locale): self
+    public function setLocale(?string $locale): self
     {
         $this->translationLocale = $locale;
 
