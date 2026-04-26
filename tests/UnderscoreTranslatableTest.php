@@ -22,6 +22,19 @@ final class UnderscoreTranslatableTest extends TestCase
     }
 
     #[Test]
+    public function it_can_reset_the_translation_locale_by_passing_null(): void
+    {
+        config(['app.locale' => 'en']);
+
+        $post = new Post();
+        $post->setLocale('nl');
+        $this->assertEquals('nl', $post->getLocale());
+
+        $post->setLocale(null);
+        $this->assertEquals('en', $post->getLocale());
+    }
+
+    #[Test]
     public function it_can_check_if_an_attribute_is_translatable(): void
     {
         $post = new Post();
